@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.Master.cs" Inherits="RestaurantReviewWeb.Site1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="Styles.css" type="text/css"/>
+</head>
+<body > <%--style="background-image:url('file:///C:/Users/Anisha/Desktop/restaurant.jpg');"--%>
+    <form id="form1" runat="server" >
+    <div>
+        <h1 align="Center">Restaurant Review System</h1>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder" runat="server"> </asp:ContentPlaceHolder>
+          <asp:HyperLink ID="linkLogin" runat="server" NavigateUrl="~/Login.aspx" Text="Login"></asp:HyperLink>
+       
+              <asp:HyperLink ID="linkSignUp" runat="server" NavigateUrl="~/Register.aspx" Text="SignUp"></asp:HyperLink>
+    </div>
+    </form>
+</body>
+</html>
