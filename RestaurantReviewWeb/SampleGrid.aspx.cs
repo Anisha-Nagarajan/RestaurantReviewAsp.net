@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -21,8 +22,9 @@ namespace RestaurantReviewWeb
         public void BindData()
         {
 
-            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-968MHKC\SQLEXPRESS;Initial Catalog=RestaurantReview;Integrated Security=True");
-            SqlCommand cmd = new SqlCommand("SELECT * FROM Registration", con);
+            string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection con = new SqlConnection(ConnectionStr);
+            SqlCommand cmd = new SqlCommand("sp_View", con);
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
             sda.Fill(dt);
@@ -31,10 +33,11 @@ namespace RestaurantReviewWeb
         }
         protected void RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
-             SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-968MHKC\SQLEXPRESS;Initial Catalog=RestaurantReview;Integrated Security=True");
-             string UserName = GridView1.DataKeys[e.RowIndex].Values["UserName"].ToString();
+            string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection con = new SqlConnection(ConnectionStr);
+            string UserName = GridView1.DataKeys[e.RowIndex].Values["UserName"].ToString();
              con.Open();
-             SqlCommand cmd = new SqlCommand("DELETE FROM Registration WHERE UserName = @UserName", con);
+             SqlCommand cmd = new SqlCommand("sp_Delete", con);
             cmd.Parameters.AddWithValue("UserName", UserName);
             int i = cmd.ExecuteNonQuery();
             con.Close();
@@ -53,35 +56,56 @@ namespace RestaurantReviewWeb
         protected void RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
 
-            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-968MHKC\SQLEXPRESS;Initial Catalog=RestaurantReview;Integrated Security=True");
-            TextBox UserName = GridView1.Rows[e.RowIndex].FindControl("txtUserName") as TextBox;
-            TextBox Password = GridView1.Rows[e.RowIndex].FindControl("txtPassword") as TextBox;
-            TextBox Email = GridView1.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
-            TextBox Street = GridView1.Rows[e.RowIndex].FindControl("txtStreet") as TextBox;
-            TextBox City = GridView1.Rows[e.RowIndex].FindControl("txtCity") as TextBox;
-            TextBox State = GridView1.Rows[e.RowIndex].FindControl("txtState") as TextBox;
-            TextBox Pincode = GridView1.Rows[e.RowIndex].FindControl("txtPincode") as TextBox;
-            TextBox Country = GridView1.Rows[e.RowIndex].FindControl("txtCountry") as TextBox;
-            TextBox PhoneNumber = GridView1.Rows[e.RowIndex].FindControl("txtPhoneNumber") as TextBox;
+            string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection con = new SqlConnection(ConnectionStr);
+            TextBox txtUserName = GridView1.Rows[e.RowIndex].FindControl("txtUserName") as TextBox;
+            TextBox txtPassword = GridView1.Rows[e.RowIndex].FindControl("txtPassword") as TextBox;
+            TextBox txtEmail = GridView1.Rows[e.RowIndex].FindControl("txtEmail") as TextBox;
+            TextBox txtStreet = GridView1.Rows[e.RowIndex].FindControl("txtStreet") as TextBox;
+            TextBox txtCity = GridView1.Rows[e.RowIndex].FindControl("txtCity") as TextBox;
+            TextBox txtState = GridView1.Rows[e.RowIndex].FindControl("txtState") as TextBox;
+            TextBox txtPincode = GridView1.Rows[e.RowIndex].FindControl("txtPincode") as TextBox;
+            TextBox txtCountry = GridView1.Rows[e.RowIndex].FindControl("txtCountry") as TextBox;
+            TextBox txtPhoneNumber = GridView1.Rows[e.RowIndex].FindControl("txtPhoneNumber") as TextBox;
             string UsrName = GridView1.DataKeys[e.RowIndex].Values["UserName"].ToString();
             con.Open();
             SqlCommand cmd = new SqlCommand("sp_Update", con);
             cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("UserName", txtUserName.Text);
-            cmd.Parameters.AddWithValue("Password", txtPassword.Text);
-            cmd.Parameters.AddWithValue("Email", txtEmail.Text);
-            cmd.Parameters.AddWithValue("Street", txtStreet.Text);
-            cmd.Parameters.AddWithValue("City", txtCity.Text);
-            cmd.Parameters.AddWithValue("State", txtState.Text);
-            cmd.Parameters.AddWithValue("Pincode", txtPincode.Text);
-            cmd.Parameters.AddWithValue("Country", txtCountry.Text);
-            cmd.Parameters.AddWithValue("PhoneNumber", txtPhoneNumber.Text);
-
+            cmd.Parameters.AddWithValue("@UserName", UsrName);
+            cmd.Parameters.AddWithValue("@Password", txtPassword.Text);
+            cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+            cmd.Parameters.AddWithValue("@Street", txtStreet.Text);
+            cmd.Parameters.AddWithValue("@City", txtCity.Text);
+            cmd.Parameters.AddWithValue("@State", txtState.Text);
+            cmd.Parameters.AddWithValue("@Pincode", txtPincode.Text);
+            cmd.Parameters.AddWithValue("@Country", txtCountry.Text);
+            cmd.Parameters.AddWithValue("@PhoneNumber", txtPhoneNumber.Text);
+           
             int i = cmd.ExecuteNonQuery();
             con.Close();
             GridView1.EditIndex = -1;
             BindData();
+
+
+        }
+
+        protected void Insert(object sender, EventArgs e)
+        {
+            string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection con = new SqlConnection(ConnectionStr);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("sp_Register", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@UserName", txtNewUserName.Text.ToString());
+            cmd.Parameters.AddWithValue("@Password", txtNewPassword.Text.ToString());
+            cmd.Parameters.AddWithValue("@Email", txtNewEmail.Text.ToString());
+            cmd.Parameters.AddWithValue("@Street", txtNewStreet.Text.ToString());
+            cmd.Parameters.AddWithValue("@City", txtNewCity.Text.ToString());
+            cmd.Parameters.AddWithValue("@State", txtNewState.Text.ToString());
+            cmd.Parameters.AddWithValue("@Pincode", txtNewPincode.Text.ToString());
+            cmd.Parameters.AddWithValue("@Country", txtNewCountry.Text.ToString());
+            cmd.Parameters.AddWithValue("@PhoneNumber", txtNewPhoneNumber.Text.ToString());
 
 
         }
