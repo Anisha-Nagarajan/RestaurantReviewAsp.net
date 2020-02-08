@@ -14,7 +14,7 @@ namespace RestaurantReviewWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            RegisterCustomer register = new RegisterCustomer();
+            CustomerRepoitory register = new CustomerRepoitory();
             CustomerEntity customer = new CustomerEntity(txtUserName.Text, txtPassword.Text, txtEmail.Text, txtStreet.Text, txtCity.Text, txtState.Text, txtPincode.Text, txtCountry.Text, txtPhoneNumber.Text);
             int rows = register.RegisterCustomerDetails(customer);
             if (rows > 0)

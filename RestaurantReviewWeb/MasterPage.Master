@@ -8,9 +8,9 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
         
     </asp:ContentPlaceHolder>
-    <link rel="stylesheet" href="Styles.css" type="text/css"/>
+ <%--   <link rel="stylesheet" href="Styles.css" type="text/css"/>--%>
 </head>
-<body > <%--style="background-image:url('file:///C:/Users/Anisha/Desktop/restaurant.jpg');"--%>
+<body >
     <form id="form1" runat="server" >
     <div>
         <h1 align="Center">Restaurant Review System</h1>
