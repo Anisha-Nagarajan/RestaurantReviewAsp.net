@@ -1,17 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="RestaurantReviewWeb.Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="Home.aspx.cs" Inherits="RestaurantReviewWeb.Home" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <div>
-      
+<asp:Content ID="contentHead" runat="server" ContentPlaceHolderID="head">
+    </asp:Content>
+        <asp:Content ID="contentPlaceHolderLogin" ContentPlaceHolderID="ContentPlaceHolder" runat="server">
+     <section>
+         <h1>Home Page</h1>
+     </section>
            
-    </div>
-    </form>
-</body>
-</html>
+ </asp:Content>

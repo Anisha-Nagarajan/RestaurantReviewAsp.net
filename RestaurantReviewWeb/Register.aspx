@@ -10,6 +10,16 @@
            
             </section>
             <table align="Center">
+
+                 <tr>
+                    <td>Id :</td>
+                    <td>
+                        <asp:TextBox ID="txtId" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldId" runat="server"
+                            ErrorMessage="Id cannot be blank" ControlToValidate="txtId"></asp:RequiredFieldValidator>
+                    </td>
+
+                </tr
                 <tr>
                     <td>UserName :</td>
                     <td>
@@ -40,6 +50,15 @@
                     </td>
 
                 </tr>
+                 <tr>
+                    <td>Role :</td>
+                    <td>
+                        <asp:TextBox ID="txtRole" runat="server"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="RequiredFieldRole" runat="server"
+                            ErrorMessage="Role cannot be blank" ControlToValidate="txtRole"></asp:RequiredFieldValidator>
+                    </td>
+
+                </tr
                 <tr>
                     <td>Email :</td>
                     <td>

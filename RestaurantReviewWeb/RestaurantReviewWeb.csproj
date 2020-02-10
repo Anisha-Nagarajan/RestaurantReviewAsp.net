@@ -76,9 +76,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="ReviewReference, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestaurantReviewBL">
+      <HintPath>..\RestaurantReviewBL\bin\Debug\RestaurantReviewBL.dll</HintPath>
+    </Reference>
+    <Reference Include="RestaurantReviewCommon">
+      <HintPath>..\RestaurantReviewCommon\bin\Debug\RestaurantReviewCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="RestaurantReviewDAL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ReviewReference\bin\Debug\ReviewReference.dll</HintPath>
+      <HintPath>..\RestaurantReviewDAL\bin\Debug\RestaurantReviewDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="RestaurantReviewEntity">
+      <HintPath>..\RestaurantReviewEntity\bin\Debug\RestaurantReviewEntity.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />

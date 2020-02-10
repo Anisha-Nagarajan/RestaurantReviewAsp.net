@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="RestaurantReviewCommon">
+      <HintPath>..\RestaurantReviewCommon\bin\Debug\RestaurantReviewCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="RestaurantReviewDAL">
+      <HintPath>..\RestaurantReviewDAL\bin\Debug\RestaurantReviewDAL.dll</HintPath>
+    </Reference>
+    <Reference Include="RestaurantReviewEntity">
+      <HintPath>..\RestaurantReviewEntity\bin\Debug\RestaurantReviewEntity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RestaurantBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

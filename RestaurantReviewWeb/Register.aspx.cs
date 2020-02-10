@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using ReviewReference;
+using RestaurantReviewBL;
+using RestaurantReviewEntity;
 
 namespace RestaurantReviewWeb
 {
@@ -14,9 +15,20 @@ namespace RestaurantReviewWeb
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            CustomerRepoitory register = new CustomerRepoitory();
-            CustomerEntity customer = new CustomerEntity(txtUserName.Text, txtPassword.Text, txtEmail.Text, txtStreet.Text, txtCity.Text, txtState.Text, txtPincode.Text, txtCountry.Text, txtPhoneNumber.Text);
-            int rows = register.RegisterCustomerDetails(customer);
+            string Id = txtId.Text;
+            string UserName = txtUserName.Text;
+            string Password = txtPassword.Text;
+            string Role = txtRole.Text;
+            string Email = txtEmail.Text;
+            string Street = txtStreet.Text;
+            string City = txtCity.Text;
+            string State = txtState.Text;
+            string Pincode = txtPincode.Text;
+            string Country = txtCountry.Text;
+            string PhoneNumber = txtPhoneNumber.Text;
+            RestaurantBL restaurantBL = new RestaurantBL();
+            CustomerEntity customer = new CustomerEntity(Id, UserName, Password, Role, Email, Street, City, State, Pincode, Country, PhoneNumber);
+            int rows= restaurantBL.RegisterIntermediate(customer);
             if (rows > 0)
             {
                 Response.Write("Registration Successful");

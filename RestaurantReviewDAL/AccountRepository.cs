@@ -2,10 +2,12 @@
 using System.Configuration;
 using System.Data;
 using System.Web.UI.WebControls;
+using RestaurantReviewEntity;
+using System;
 
-namespace ReviewReference
+namespace RestaurantReviewDAL
 {
-   public class CustomerRepoitory
+   public class AccountRepository
     {
         string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         public int RegisterCustomerDetails(CustomerEntity customer)
@@ -16,7 +18,7 @@ namespace ReviewReference
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@UserName", customer.UserName);
                 cmd.Parameters.AddWithValue("@Password", customer.Password);
-               //cmd.Parameters.AddWithValue("@ConfirmPassword", txtConfirmPass0word.Text);
+               //cmd.Parameters.AddWithValue("@ConfirmPassword", txtConfirmPassword.Text);
                 cmd.Parameters.AddWithValue("@Email", customer.Email);
                 cmd.Parameters.AddWithValue("@Street", customer.Street);
                 cmd.Parameters.AddWithValue("@City", customer.City);
@@ -66,6 +68,21 @@ namespace ReviewReference
                 int rows = cmd.ExecuteNonQuery();
                 return rows;
             }
+        }
+        public string LoginUser(string UserName,string Password)
+        {
+            string ConnectionStr = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            SqlConnection con = new SqlConnection(ConnectionStr);
+            SqlCommand cmd = new SqlCommand("sp_Select", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@UserName", UserName);
+            cmd.Parameters.AddWithValue("@Password", Password);
+            cmd.Parameters.Add("@Role", SqlDbType.VarChar, 30);
+            cmd.Parameters["@Role"].Direction = ParameterDirection.Output;
+            con.Open();
+            string role = (String)cmd.ExecuteScalar();
+            con.Close();
+            return role;
         }
         public void DeleteCustomer(string UserName)
         {
